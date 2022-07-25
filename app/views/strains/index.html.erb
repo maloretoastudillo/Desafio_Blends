@@ -1,28 +1,30 @@
 <p id="notice"><%= notice %></p>
+<div class='container'>
+  <h1>Cepas</h1>
 
-<h1>Cepas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Origen</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @strains.each do |strain| %>
+  <table class='table border border-dark'>
+    <thead class='thead-dark'>
       <tr>
-        <td><%= strain.name %></td>
-        <td><%= strain.origin %></td>
-        <td><%= link_to 'Editar', edit_strain_path(strain) %></td>
-        <td><%= link_to 'Eliminar', strain, method: :delete, data: { confirm: '¿Estás seguro de eliminar este registro?' } %></td>
+        <th scope='col'>Nombre</th>
+        <th scope='col'>Origen</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @strains.each do |strain| %>
+        <tr>
+          <td><%= strain.name %></td>
+          <td><%= strain.origin %></td>
+          <td><%= link_to 'Editar', edit_strain_path(strain), class:'text-black-50' %></td>
+          <td><%= link_to 'Eliminar', strain, method: :delete, data: { confirm: '¿Estás seguro de eliminar este registro?' }, class:'text-black-50' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Agregar cepa', new_strain_path %>
+  <br>
+
+  <%= link_to 'Agregar cepa', new_strain_path %>   |   
+  <%= link_to 'Ir a Vinos', wines_path %>
+</div>

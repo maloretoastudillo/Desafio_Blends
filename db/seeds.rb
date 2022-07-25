@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Strain.destroy_all
+
+strains = [
+    {name: 'Carmener', origin: 'Aconcagua'},
+    {name: 'Brut', origin: 'Colchagua'},
+    {name: 'Cabernet Sauvignon', origin: 'Maipo'},
+    {name: 'Carignan', origin: 'Maule'},
+    {name: 'Chardonnay', origin: 'Casablanca'},
+    {name: 'Chenin Blanc', origin: 'Maule'},
+    {name: 'Cinsault', origin: 'Itata'},
+    {name: 'Demisec', origin: 'Mendoza'},
+    {name: 'Malbec', origin: 'Maule'},
+    {name: 'Merlot', origin: 'Maipo'},
+    {name: 'Pinot Noir', origin: 'Cachapoal'}
+]
+
+strains.each do |strain|
+    Strain.create(name: strain[:name],
+                        origin: strain[:origin]
+    )
+
+end

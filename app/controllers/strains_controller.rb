@@ -6,7 +6,7 @@ class StrainsController < ApplicationController
     end
   
     def new
-      @strain = Wine.new
+      @strain = Strain.new
     end
   
     def edit
@@ -17,7 +17,7 @@ class StrainsController < ApplicationController
   
       respond_to do |format|
         if @strain.save
-          format.html { redirect_to strains_url, notice: "La cepa: #{@strain} fue agregada" }
+          format.html { redirect_to strains_url, notice: "La cepa: '#{@strain.name}' fue agregada" }
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -26,8 +26,8 @@ class StrainsController < ApplicationController
   
     def update
       respond_to do |format|
-        if @strain.update(wine_params)
-          format.html { redirect_to strains_url, notice: "La cepa: #{@strain} fue modificada" }
+        if @strain.update(strain_params)
+          format.html { redirect_to strains_url, notice: "La cepa: '#{@strain.name}' fue modificada" }
         else
           format.html { render :edit, status: :unprocessable_entity }
         end
@@ -38,7 +38,7 @@ class StrainsController < ApplicationController
       @strain.destroy
   
       respond_to do |format|
-        format.html { redirect_to strains_url, notice: "La cepa: #{@strain} fue eliminada" }
+        format.html { redirect_to strains_url, notice: "La cepa: '#{@strain.name}' fue eliminada" }
       end
     end
   
