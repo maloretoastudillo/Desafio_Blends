@@ -1,25 +1,22 @@
 class WinesController < ApplicationController
-  before_action :set_wine, only: %i[ show edit update destroy ]
+  before_action :set_wine, only: %i[ edit update destroy ]
   before_action :set_strain, only: %i[ new edit create update]
 
   # GET /wines or /wines.json
   def index
-    @wines = Wine.all
+    @wines = Wine.includes(blends: [:strain]).all
+    @blends = Blend.all
   end
 
-  # GET /wines/1 or /wines/1.json
-  def show
-  end
 
   # GET /wines/new
   def new
     @wine = Wine.new
-    @blend = @wine.blend.build
+    @blends = @wine.blends.build
   end
 
   # GET /wines/1/edit
   def edit
-    @blend = @wine.blend.build
   end
 
   # POST /wines or /wines.json
@@ -28,7 +25,7 @@ class WinesController < ApplicationController
 
     respond_to do |format|
       if @wine.save
-        format.html { redirect_to wine_url(@wine), notice: "Wine was successfully created." }
+        format.html { redirect_to wines_url(@wine), notice: "El vino: '#{@wine.name}' fue agregado" }
         format.json { render :show, status: :created, location: @wine }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +38,7 @@ class WinesController < ApplicationController
   def update
     respond_to do |format|
       if @wine.update(wine_params)
-        format.html { redirect_to wine_url(@wine), notice: "Wine was successfully updated." }
+        format.html { redirect_to wines_url(@wine), notice: "El vino: '#{@wine.name}' fue modificado" }
         format.json { render :show, status: :ok, location: @wine }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +52,7 @@ class WinesController < ApplicationController
     @wine.destroy
 
     respond_to do |format|
-      format.html { redirect_to wines_url, notice: "Wine was successfully destroyed." }
+      format.html { redirect_to wines_url, notice: "El vino: '#{@wine.name}' fue eliminado del registro" }
       format.json { head :no_content }
     end
   end
@@ -72,6 +69,6 @@ class WinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, :wineyard, :year, blends_attributes: [:id, :percentage, :strain_id])
+      params.require(:wine).permit(:name, :wineyard, :year, blends_attributes: [:id, :percentage, :strain_id, :_destroy])
     end
 end

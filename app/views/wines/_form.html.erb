@@ -1,5 +1,5 @@
 <div class='container d-flex justify-content-start'>
-  <%= form_with(model: wine) do |form| %>
+  <%= form_with(model: wine, local: true) do |form| %>
     <% if wine.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
@@ -9,34 +9,39 @@
             <li><%= error.full_message %></li>
           <% end %>
         </ul>
-    </div>
-  <% end %>
-
-  <div class='border border-muted p-3 rounded'>
-    <div class="form-group">
-      <%= form.label :name %>
-      <%= form.text_field :name, class:'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :wineyard %>
-      <%= form.text_field :wineyard, class:'form-group'%>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :year %>
-      <%= form.number_field :year, class: 'form-group' %>
-    </div>
-
-    <%= form.fields_for :blends do |blend| %>
-      <div class="field">
-        <%= blend.select :strain_id, @strains %>
-        <%= blend.number_field :percentage %>
-      </div>    
+      </div>
     <% end %>
 
-    <div class="actions">
-    <%= form.submit 'Guardar', class:'btn btn-primary btn-block' %>
-  </div>
+    <div class='border border-muted p-3 rounded'>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class:'form-control' %>
+      </div>
 
-<% end %>
+      <div class="form-group">
+        <%= form.label :wineyard %>
+        <%= form.text_field :wineyard, class:'form-group'%>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :year %>
+        <%= form.number_field :year, class: 'form-group' %>
+      </div>
+
+      <div>
+        <%= form.fields_for :blends do |t| %>
+          <%= render "blend_fields", :f => t %>
+        <% end %>
+        <div>
+          <br>
+          <%#= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Guardar', class:'btn btn-primary btn-block' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

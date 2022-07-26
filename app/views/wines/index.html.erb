@@ -8,19 +8,26 @@
         <th scope='col'>Nombre</th>
         <th scope='col'>Viña</th>
         <th scope='col'>Año</th>
-        <th colspan="3"></th>
+        <th scope='col'>Cepas</th>
+        <th colspan="2"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @wines.each do |wine| %>
         <tr>
-          <td><%= wine.name %></td>
-          <td><%= wine.wineyard %></td>
-          <td><%= wine.year %></td>
-          <td><%= link_to 'Detalles', wine %></td>
-          <td><%= link_to 'Editar', edit_wine_path(wine), class:'text-black-50' %></td>
-          <td><%= link_to 'Eliminar', wine, method: :delete, data: { confirm: '¿Está seguro de eliminar este registro?' }, class:'text-black-50' %></td>
+          <td class='align-middle'><%= wine.name %></td>
+          <td class='align-middle'><%= wine.wineyard %></td>
+          <td class='align-middle'><%= wine.year %></td>
+          <td class='align-middle'>
+            <ul class='list-group list-group-flush'>
+              <% wine.ordered.each do |blend| %>
+                <li class='list-group-item border-0'><%= blend[0]%><%= "  (#{blend[1]})"  %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td class='align-middle'><%= link_to 'Editar', edit_wine_path(wine), class:'text-black-50' %></td>
+          <td class='align-middle'><%= link_to 'Eliminar', wine, method: :delete, data: { confirm: '¿Está seguro de eliminar este registro?' }, class:'text-black-50' %></td>
         </tr>
       <% end %>
     </tbody>
