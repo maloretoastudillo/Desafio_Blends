@@ -1,4 +1,6 @@
 class WinesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorization, except: %i[ index ]
   before_action :set_wine, only: %i[ edit update destroy ]
   before_action :set_strain, only: %i[ new edit create update]
 
@@ -59,6 +61,10 @@ class WinesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def authorization
+      redirect_to wines_path unless current_user && current_user.admin
+    end
+   
     def set_wine
       @wine = Wine.includes(blends: [:strain]).find(params[:id])
     end

@@ -64,3 +64,5 @@ end
 
 # Unobtrusive nested forms handling, using jQuery. Use this & discover cocoon-heaven.
 gem 'cocoon'
+
+gem 'devise'

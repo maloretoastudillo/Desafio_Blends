@@ -1,9 +1,15 @@
-<p id="notice"><%= notice %></p>
 <div class='container'>
+  <div class='text-right'>
+    <% if current_user %>
+      <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete%>
+    <% end %>
+    <br>
+  </div>
+  
   <h1>Vinos</h1>
 
   <table class='table border border-dark'>
-    <thead class='thead-dark'>
+    <thead class='color text-white'>
       <tr>
         <th scope='col'>Nombre</th>
         <th scope='col'>Viña</th>
@@ -26,15 +32,22 @@
               <% end %>
             </ul>
           </td>
-          <td class='align-middle'><%= link_to 'Editar', edit_wine_path(wine), class:'text-black-50' %></td>
-          <td class='align-middle'><%= link_to 'Eliminar', wine, method: :delete, data: { confirm: '¿Está seguro de eliminar este registro?' }, class:'text-black-50' %></td>
+          
+          <% if current_user.admin %>
+            <td class='align-middle'><%= link_to 'Editar', edit_wine_path(wine), class:'text-black-50' %></td>
+            <td class='align-middle'><%= link_to 'Eliminar', wine, method: :delete, data: { confirm: '¿Está seguro de eliminar este registro?' }, class:'text-black-50' %></td>         
+          <% end %>
+          
         </tr>
       <% end %>
     </tbody>
   </table>
 
   <br>
+  
+  <% if current_user.admin? %>
+    <%= link_to 'Agregar Vino', new_wine_path %>   |   
+    <%= link_to 'Ir a Cepas', strains_path %>    
+  <% end %>  
 
-  <%= link_to 'Agregar Vino', new_wine_path %>   |   
-  <%= link_to 'Ir a Cepas', strains_path %>
 </div>

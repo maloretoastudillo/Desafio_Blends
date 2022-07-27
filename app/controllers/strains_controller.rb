@@ -1,4 +1,6 @@
 class StrainsController < ApplicationController
+    before_action :authorization
+
     before_action :set_strain, only: %i[ edit update destroy ]
   
     def index
@@ -44,6 +46,10 @@ class StrainsController < ApplicationController
   
     private
       # Use callbacks to share common setup or constraints between actions.
+      def authorization
+        redirect_to wines_path unless current_user && current_user.admin
+      end
+      
       def set_strain
         @strain = Strain.find(params[:id])
       end
