@@ -1,0 +1,26 @@
+<div class= 'container card  col-md-6'>
+<p id="notice"><%= notice %></p>
+
+<div class="card text-center">
+  <div class="card-header h4">
+    <%= @wine.name %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Viña <%= @wine.wineyard %> (<%= @wine.year %>)</h5>
+    <ul class='d-flex justify-content-center'>
+        <% @wine.ordered.each do |blend| %>
+            <li class='mx-2'><%= blend[0]%><%= "  (#{blend[1]}%)"  %></li>
+        <% end %>
+    </ul>
+    <p class="card-text">Calificación:  <%= @wine.grade %></p>
+    <ul class='list-group list-group-flush'>
+        <%# wine.experts.each do |expert| %>
+            <li class='list-group-item border-0'><%#= expert.name%><%#= expert.place  %></li>
+        <%# end %>
+    </ul>
+  </div>
+  <div class="card-footer text-muted">
+<%= link_to 'Editar', edit_wine_path(@wine) %> |
+<%= link_to 'Volver a Vinos', wines_path %>
+  </div>
+</div>

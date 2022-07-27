@@ -1,8 +1,8 @@
 class WinesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorization, except: %i[ index ]
-  before_action :set_wine, only: %i[ edit update destroy ]
-  before_action :set_strain, only: %i[ new edit create update]
+  before_action :set_wine, only: %i[ show edit update destroy ]
+  before_action :set_strain, only: %i[ new show edit create update]
 
   # GET /wines or /wines.json
   def index
@@ -10,6 +10,8 @@ class WinesController < ApplicationController
     @blends = Blend.all
   end
 
+  def show
+  end
 
   # GET /wines/new
   def new
@@ -75,6 +77,6 @@ class WinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, :wineyard, :year, blends_attributes: [:id, :percentage, :strain_id, :_destroy])
+      params.require(:wine).permit(:name, :wineyard, :year, :grade, blends_attributes: [:id, :percentage, :strain_id, :_destroy])
     end
 end
