@@ -36,6 +36,8 @@ class WinesController < ApplicationController
 
   # PATCH/PUT /wines/1 or /wines/1.json
   def update
+    @blends = Blend.where(wine: @wine)
+
     respond_to do |format|
       if @wine.update(wine_params)
         format.html { redirect_to wines_url(@wine), notice: "El vino: '#{@wine.name}' fue modificado" }
