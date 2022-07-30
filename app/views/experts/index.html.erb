@@ -1,0 +1,40 @@
+<div class="container">
+
+<h1>Expertos</h1>
+
+<table class='table border border-dark'>
+  <thead class='color text-white'>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Nacionalidad</th>
+      <th>Lugar de Trabajo</th>
+      <th>Ocupación</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @experts.each do |expert| %>
+      <tr>
+        <td><%= link_to "#{expert.name}", expert %></td>
+        <td><%= expert.age %></td>
+        <td><%= expert.nationality %></td>
+        <td><%= expert.workplace %></td>
+        <td class='d-flex'><li class='mx-2'><%= 'Editor' if expert.editor == true %></li>
+            <li class='mx-2'><%= 'Escritor' if expert.writer == true %></li>
+            <li class='mx-2'><%= 'Crítico' if expert.reviewer == true %></li></td>
+        <td><%= link_to 'Editar', edit_expert_path(expert) %></td>
+        <td><%= link_to 'Eliminar', expert, method: :delete, data: { confirm: '¿Está seguro de eliminar este registro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Agregar Experto', new_expert_path %> |
+<%= link_to 'Ir a Cepas', strains_path %>|
+<%= link_to 'Ir a Vinos', wines_path %> 
+</div>
+

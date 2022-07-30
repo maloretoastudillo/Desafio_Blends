@@ -1,0 +1,54 @@
+<div class='d-flex justify-content-start'>
+  <%= form_with(model: expert) do |form| %>
+    <% if expert.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(expert.errors.count, "error") %> prohibited this expert from being saved:</h2>
+
+        <ul>
+          <% expert.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <div class='border border-muted p-3 rounded'>
+    <div class="form-group">
+      <%= form.label :Nombre %>
+      <%= form.text_field :name, class: 'form-control', autofocus: true%>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :Edad %>
+      <%= form.number_field :age, class:'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :Nacionalidad %>
+      <%= form.text_field :nationality, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label 'Lugar de trabajo' %>
+      <%= form.text_field :workplace, class: 'form-control' %>
+    </div>
+
+  <div class="form-check form-check-inline">
+    <%= form.check_box :editor, class:'form-check-input' %>
+    <%= form.label :editor, class:'form-check-label mx-2' %>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <%= form.check_box :escritor, class:'form-check-input' %>
+    <%= form.label :writer, class:'form-check-label mx-2' %>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <%= form.check_box :reviewer, class:'form-check-input' %>
+    <%= form.label :crítico, class:'form-check-label mx-2' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Guardar', class: 'btn color btn-block text-white' %>
+  </div>
+<% end %>

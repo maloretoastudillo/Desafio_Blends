@@ -1,6 +1,7 @@
 Strain.destroy_all
 Wine.destroy_all
 Blend.destroy_all
+User.destroy_all
 
 strains = [
     {name: 'Carmener', origin: 'Aconcagua'},
@@ -71,4 +72,16 @@ blends.each do |blend|
                  percentage: blend[:percentage]
     )
 
+end
+
+users = [
+    {email: 'maloreto@user.com', password: '123456', admin: false},
+    {email: 'maloreto@admin.com', password: '123456', admin: true}
+]
+
+users.each do |user|
+    User.create(email: user[:email],
+                password: user[:password],
+                admin: user[:admin]
+    )
 end

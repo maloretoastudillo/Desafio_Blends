@@ -43,6 +43,17 @@
         <%= form.number_field :grade, class: 'form-group' %>
       </div>
 
+      <div>
+        <%= form.fields_for :experts do |t| %>
+          <%= render "expert_fields", :f => t %>
+        <% end %>
+      
+        <div>
+          <br>
+          <%= link_to_add_association "Agregar evaluador", form, :experts %> <!-- (*) -->
+        </div>
+      </div>
+
       <div class="actions">
         <%= form.submit 'Guardar', class:'btn color btn-block text-white' %>
       </div>

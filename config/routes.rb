@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :experts
   devise_for :users
   resources :wines
   resources :strains

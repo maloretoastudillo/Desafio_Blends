@@ -52,8 +52,9 @@
   <br>
   
   <% if current_user.admin? %>
-    <%= link_to 'Agregar Vino', new_wine_path %>   |   
-    <%= link_to 'Ir a Cepas', strains_path %>    
+    <%= link_to 'Agregar Vino', new_wine_path %>|   
+    <%= link_to 'Ir a Cepas', strains_path %>|
+    <%= link_to 'Ir a Expertos', experts_path %> 
   <% end %>  
 
 </div>

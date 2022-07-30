@@ -1,0 +1,28 @@
+<div class= 'container card  col-md-6'>
+  <p id="notice"><%= notice %></p>
+
+  <div class="card text-center">
+    <div class="card-header h3">
+      <strong><%= @expert.name %></strong>
+    </div>
+
+    <div class="card-body">
+      <h4 class="card-title"><%= @expert.age%> años - <%= @expert.workplace %></h4>
+        <h5>Nacionalidad: <%= @expert.nationality %></h5>
+        <ul class='d-flex justify-content-center'>
+          <li class='mx-2'><%= 'Editor' if @expert.editor == true %></li>
+          <li class='mx-2'><%= 'Escritor' if @expert.writer == true %></li>
+          <li class='mx-2'><%= 'Crítico' if @expert.reviewer == true %></li>
+        </ul>
+        <p>Vinos evaluados:</p>
+    </div>
+  
+    <div class="card-footer text-muted">
+      <%= link_to 'Editar', edit_expert_path(@expert) %> |
+      <%= link_to 'Volver a expertos', experts_path %>
+    </div>
+  </div>
+
+</div>
+
+

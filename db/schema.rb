@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_031325) do
+ActiveRecord::Schema.define(version: 2022_07_27_213006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(version: 2022_07_27_031325) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["strain_id"], name: "index_blends_on_strain_id"
     t.index ["wine_id"], name: "index_blends_on_wine_id"
+  end
+
+  create_table "experts", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "age"
+    t.string "nationality"
+    t.string "workplace"
+    t.boolean "editor"
+    t.boolean "writer"
+    t.boolean "reviewer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "experts_wines", id: false, force: :cascade do |t|
+    t.bigint "wine_id", null: false
+    t.bigint "expert_id", null: false
+    t.index ["expert_id", "wine_id"], name: "index_experts_wines_on_expert_id_and_wine_id"
+    t.index ["wine_id", "expert_id"], name: "index_experts_wines_on_wine_id_and_expert_id"
   end
 
   create_table "strains", force: :cascade do |t|

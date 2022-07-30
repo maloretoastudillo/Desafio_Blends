@@ -8,6 +8,7 @@ class WinesController < ApplicationController
   def index
     @wines = Wine.includes(blends: [:strain]).all
     @blends = Blend.all
+
   end
 
   def show
@@ -17,6 +18,7 @@ class WinesController < ApplicationController
   def new
     @wine = Wine.new
     @blends = @wine.blends.build
+    @experts = Expert.all.pluck(:id, :name)
   end
 
   # GET /wines/1/edit
@@ -77,6 +79,6 @@ class WinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, :wineyard, :year, :grade, blends_attributes: [:id, :percentage, :strain_id, :_destroy])
+      params.require(:wine).permit(:name, :wineyard, :year, :grade, {blends_attributes: [:id, :percentage, :strain_id, :_destroy]}, experts_attributes: [:id, :_destroy])
     end
 end
