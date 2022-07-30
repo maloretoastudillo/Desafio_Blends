@@ -1,4 +1,3 @@
-<div class='container d-flex justify-content-start'>
   <%= form_with(model: wine, local: true) do |form| %>
     <% if wine.errors.any? %>
       <div id="error_explanation">
@@ -32,16 +31,12 @@
         <%= form.fields_for :blends do |t| %>
           <%= render "blend_fields", :f => t %>
         <% end %>
-        <div>
-          <br>
-          <%#= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
-        </div>
+          <%= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
       </div>
-
+      <br>
       <div class="actions">
-        <%= form.submit 'Guardar', class:'btn btn-primary btn-block' %>
+        <%= form.submit 'Guardar', class:'btn colorw text-white btn-block' %>
       </div>
     </div>
 
   <% end %>
-</div>

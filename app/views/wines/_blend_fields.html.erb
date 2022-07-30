@@ -1,12 +1,14 @@
-<div class="nested-fields">
-    <div class='form-group'>   
+<div class=" row nested-fields">
+    <div class='col form-group'>   
         <%= f.label "Cepa" %>
         <%= f.collection_select :strain_id, Strain.all, :id, :name, class:'form-control' %>   
     </div>
 
-    <div class='form-group'>
+    <div class='col form-group'>
         <%= f.label "Porcentaje" %>
         <%= f.number_field :percentage, class:'form-group' %>
     </div>
-    <%#= link_to_remove_association "Eliminar", f, class:'d-flex justify-content-end' %>
+    <div class="col d-flex align-items-center">
+        <%= link_to_remove_association "Eliminar", f %>
+    </div>
 </div>
