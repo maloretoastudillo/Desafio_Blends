@@ -1,63 +1,59 @@
-<div class='d-flex justify-content-start'>
-  <%= form_with(model: wine, local: true) do |form| %>
-    <% if wine.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
+<%= form_with(model: wine, local: true) do |form| %>
+  <% if wine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
 
-        <ul>
-          <% wine.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class='border border-muted p-3 rounded'>
-      <div class="form-group">
-        <%= form.label :name %>
-        <%= form.text_field :name, class:'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :wineyard %>
-        <%= form.text_field :wineyard, class:'form-group'%>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :year %>
-        <%= form.number_field :year, class: 'form-group' %>
-      </div>
-
-      <div>
-        <%= form.fields_for :blends do |t| %>
-          <%= render "blend_fields", :f => t %>
+      <ul>
+        <% wine.errors.each do |error| %>
+          <li><%= error.full_message %></li>
         <% end %>
-        <div>
-          <br>
-          <%#= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
-        </div>
-      </div>
+      </ul>
+    </div>
+  <% end %>
 
-      <div class="form-group">
-        <%= form.label 'calificación' %>
-        <%= form.number_field :grade, class: 'form-group' %>
-      </div>
+  <div class='border border-muted p-3 rounded'>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class:'form-control' %>
+    </div>
 
-      <div>
-        <%= form.fields_for :experts do |t| %>
-          <%= render "expert_fields", :f => t %>
-        <% end %>
+    <div class="form-group">
+      <%= form.label :wineyard %>
+      <%= form.text_field :wineyard, class:'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :year %>
+      <%= form.number_field :year, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label 'calificación' %>
+      <%= form.number_field :grade, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= form.fields_for :blends do |t| %>
+        <%= render "blend_fields", :f => t %>
+      <% end %>
+      <%= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
+    </div>
+    <br>
+
+    <div>
+      <%= form.fields_for :experts do |t| %>
+        <%= render "expert_fields", :f => t %>
+      <% end %>
       
-        <div>
-          <br>
-          <%= link_to_add_association "Agregar evaluador", form, :experts %> <!-- (*) -->
-        </div>
-      </div>
-
-      <div class="actions">
-        <%= form.submit 'Guardar', class:'btn color btn-block text-white' %>
+      <div>
+        <br>
+        <%= link_to_add_association "Agregar evaluador", form, :experts %> <!-- (*) -->
       </div>
     </div>
 
-  <% end %>
-</div>
+    <div class="actions">
+      <%= form.submit 'Guardar', class:'btn color btn-block text-white' %>
+    </div>
+  </div>
+
+<% end %>
