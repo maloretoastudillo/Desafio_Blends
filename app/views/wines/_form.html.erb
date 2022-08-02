@@ -11,7 +11,6 @@
     </div>
   <% end %>
 
-  <div class='border border-muted p-3 rounded'>
     <div class="form-group">
       <%= form.label :name %>
       <%= form.text_field :name, class:'form-control' %>
@@ -33,7 +32,7 @@
     </div>
 
     <div>
-      <%= form.fields_for :blends do |t| %>
+      <% form.fields_for :blends do |t| %>
         <%= render "blend_fields", :f => t %>
       <% end %>
       <%= link_to_add_association 'Agregar Cepa', form, :blends %> <!-- (*) -->
@@ -41,19 +40,15 @@
     <br>
 
     <div>
-      <%= form.fields_for :experts do |t| %>
+      <% form.fields_for :experts do |t| %>
         <%= render "expert_fields", :f => t %>
       <% end %>
-      
-      <div>
-        <br>
-        <%= link_to_add_association "Agregar evaluador", form, :experts %> <!-- (*) -->
-      </div>
+      <%= link_to_add_association "Agregar evaluador", form, :experts %> <!-- (*) -->
     </div>
+    <br>
+    <br>
 
     <div class="actions">
       <%= form.submit 'Guardar', class:'btn color btn-block text-white' %>
     </div>
-  </div>
-
 <% end %>

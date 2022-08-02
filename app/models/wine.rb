@@ -7,7 +7,8 @@ class Wine < ApplicationRecord
     validate :check_percentage
     validate :check_strains
 
-    accepts_nested_attributes_for   :blends,
+    accepts_nested_attributes_for   :blends, 
+                                    :experts,
                                     allow_destroy: true,
      	                            reject_if: proc { |attributes| attributes[:percentage].blank? }
 

@@ -15,6 +15,11 @@
           <li class='mx-2'><%= 'Crítico' if @expert.reviewer == true %></li>
         </ul>
         <p>Vinos evaluados:</p>
+        <ul>
+          <% @expert.wines.map do |wine| %>
+            <li><%= link_to "#{wine.name}", wine_path %></li>
+          <% end %>
+        </ul>
     </div>
   
     <div class="card-footer text-muted">

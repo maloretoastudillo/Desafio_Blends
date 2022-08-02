@@ -1,18 +1,15 @@
-<div class='row ml-1'>
-<div class="nested-fields">
-
-    <div class='col form-group'>   
-        <%= f.label "Cepa" %></div>
-        <%= f.collection_select :strain_id, Strain.all, :id, :name, class:'form-control-lg' %>   
+<div class="nested-fields d-flex align-items-center">
+    <div class='form-group'>   
+        <%= f.label "Cepa" %>
+        <%= f.collection_select :strain_id, Strain.all, :id, :name, class:'form-control' %>   
     </div>
 
-    <div class="col form-group">
+    <div class="form-group mx-3">
         <%= f.label "Porcentaje" %>
-        <%= f.number_field :percentage, class:'form-control' %>
+        <%= f.number_field :percentage %>
     </div>
 
-    <div class='col d-flex align-items-center'>
+    <div>
         <%= link_to_remove_association "Eliminar", f %>
     </div>
-</div>
 </div>

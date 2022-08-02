@@ -3,6 +3,8 @@ class WinesController < ApplicationController
   before_action :authorization, except: %i[ index ]
   before_action :set_wine, only: %i[ show edit update destroy ]
   before_action :set_strain, only: %i[ new show edit create update]
+  before_action :set_experts, only: %i[ new edit create update]
+
 
   # GET /wines or /wines.json
   def index
@@ -18,8 +20,7 @@ class WinesController < ApplicationController
   def new
     @wine = Wine.new
     @blends = @wine.blends.build
-    @evaluations = @wine.experts.build
-    @experts = Expert.all.pluck(:id, :name)
+    @wine.experts.build
   end
 
   # GET /wines/1/edit
@@ -80,8 +81,12 @@ class WinesController < ApplicationController
       @strains = Strain.pluck(:name, :id)
     end
 
+    def set_experts
+      @experts = Expert.all
+    end
+
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, :wineyard, :year, :grade, {blends_attributes: [:id, :percentage, :strain_id, :_destroy]}, experts_attributes: [:expert_id, :_destroy])
+      params.require(:wine).permit(:name, :wineyard, :year, :grade, {blends_attributes: [:id, :percentage, :strain_id, :_destroy]})
     end
 end
