@@ -20,7 +20,6 @@ class WinesController < ApplicationController
   def new
     @wine = Wine.new
     @blends = @wine.blends.build
-    @wine.experts.build
   end
 
   # GET /wines/1/edit
@@ -29,7 +28,8 @@ class WinesController < ApplicationController
 
   # POST /wines or /wines.json
   def create
-    @wine = Wine.new(wine_params)
+        @wine = Wine.new(wine_params)
+
 
     respond_to do |format|
       if @wine.save
@@ -87,6 +87,7 @@ class WinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, :wineyard, :year, :grade, {blends_attributes: [:id, :percentage, :strain_id, :_destroy]})
+      params.require(:wine).permit(:name, :wineyard, :year, :grade, {blends_attributes: [:id, :percentage, :strain_id, :_destroy]}, {experts_attributes: [:id, :_destroy]})
     end
+
 end
