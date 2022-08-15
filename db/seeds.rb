@@ -28,21 +28,21 @@ strains.each do |strain|
 end
 
 wines = [
-    {name: 'Trío Reserva Merlot', wineyard: 'Emiliana', year: 2018},
-    {name: 'Marqués de Casa', wineyard: 'Concha y Toro', year: 2125},
-    {name: 'Tamaya', wineyard: 'Casa Tamaya', year: 2014},
-    {name: 'The Blend Collection', wineyard: 'Errázuriz', year: 2012},
-    {name: 'Cono Sur', wineyard: 'Cono Sur', year: 2010},
-    {name: 'Ensamblaje Blanco', wineyard: 'Clos de Lolol', year: 2019},
-    {name: 'Trío Reserva Sauvignon', wineyard: 'Concha y Toro', year: 2004}
+    {name: 'Trío Reserva Merlot', wineyard: 'Emiliana', year: 2018, grade: 78},
+    {name: 'Marqués de Casa', wineyard: 'Concha y Toro', year: 2125, grade: 65},
+    {name: 'Tamaya', wineyard: 'Casa Tamaya', year: 2014, grade: 89},
+    {name: 'The Blend Collection', wineyard: 'Errázuriz', year: 2012, grade: 72},
+    {name: 'Cono Sur', wineyard: 'Cono Sur', year: 2010, grade: 95},
+    {name: 'Ensamblaje Blanco', wineyard: 'Clos de Lolol', year: 2019, grade: 90},
+    {name: 'Trío Reserva Sauvignon', wineyard: 'Concha y Toro', year: 2004, grade: 87}
 ]
 
 wines.each do |wine|
     Wine.create(name: wine[:name],
                 wineyard: wine[:wineyard],
-                year: wine[:year]
+                year: wine[:year],
+                grade: wine[:grade]
     )
-
 end
 
 blends = [
@@ -84,4 +84,25 @@ users.each do |user|
                 password: user[:password],
                 admin: user[:admin]
     )
+end
+
+experts = [
+    {name: "Marcelo Retamal", age: 47 , nationality: "chilena", workplace: "Revista La Cava", editor: true, writer: true, reviwer: false},
+    {name: "Claudia Puentes", age: 45 , nationality: "francesa", workplace: "Revista Vins", editor: false, writer: true, reviwer: true},
+    {name: "Fernando Celis", age: 55 , nationality: "chilena", workplace: "Vinos y más", editor: true, writer: false, reviwer: true},
+    {name: "Catalina Moraga", age: 37 , nationality: "canadiense", workplace: "Revista La Cava", editor: true, writer: false, reviwer: true},
+    {name: "Andrea Palacios", age: 51 , nationality: "chilena", workplace: "Revista el Valle", editor: true, writer: true, reviwer: false},
+    {name: "Cristóbal Rodríguez", age: 40 , nationality: "chilena", workplace: "Placeres de Reserva", editor: false, writer: true, reviwer: false},
+    {name: "Juan Pedro Matamala", age: 57 , nationality: "chilena", workplace: "Revista Gran Bodega", editor: true, writer: false, reviwer: false}
+]
+
+experts.each do |expert|
+    Expert.create(  name: expert[:name],
+                    age: expert[:age],
+                    nationality: expert[:nationality],
+                    workplace: expert[:workplace],
+                    editor: expert[:editor],
+                    writer: expert[:writer],
+                    reviewer: expert[:reviewer]
+                  )
 end

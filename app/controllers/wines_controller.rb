@@ -28,7 +28,7 @@ class WinesController < ApplicationController
 
   # POST /wines or /wines.json
   def create
-        @wine = Wine.new(wine_params)
+        @wine = Wine.create(wine_params)
 
 
     respond_to do |format|
@@ -75,6 +75,7 @@ class WinesController < ApplicationController
    
     def set_wine
       @wine = Wine.includes(blends: [:strain]).find(params[:id])
+      @wine.experts = Expert.all.where(wine_id: :@wine.id)
     end
 
     def set_strain
